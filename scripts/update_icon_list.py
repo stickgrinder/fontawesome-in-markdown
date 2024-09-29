@@ -21,7 +21,7 @@ def main():
         for icon_name in icons_json.keys()
     }
 
-    with open('../fontawesome_markdown/icon_list.py', 'w') as icons_list_py:
+    with open('../src/fontawesome_in_markdown/icon_list.py', 'w') as icons_list_py:
         icons_list_py.write('from __future__ import unicode_literals\n')
         icons_list_py.write('icons = ')
         icons_list_py.write(json.dumps(icons, indent=2))

@@ -2,11 +2,11 @@
 from __future__ import unicode_literals
 import pytest
 from markdown import Markdown
-from fontawesome_markdown import FontAwesomeInlineProcessor, FontAwesomeException, FontAwesomeExtension
+from fontawesome_in_markdown import FontAwesomeInlineProcessor, FontAwesomeException, FontAwesomeExtension
 
 @pytest.fixture(params=[
     FontAwesomeExtension(),
-    'fontawesome_markdown'
+    'fontawesome_in_markdown'
 ], ids=["import", "string"])
 def fa_markdown(request):
     return Markdown(extensions=[request.param])
