@@ -1,6 +1,6 @@
 [project]
 name = "fontawesome-in-markdown"
-version = "0.1.1"
+version = "0.2.0"
 authors = [
   { name="StickGrinder", email="stickgrinder@gmail.com" },
 ]
