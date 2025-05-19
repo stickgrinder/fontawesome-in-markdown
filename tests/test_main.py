@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 import pytest
 from markdown import Markdown
-from fontawesome_in_markdown import FontAwesomeInlineProcessor, FontAwesomeException, FontAwesomeExtension
+from fontawesome_in_markdown import FontAwesomeExtension
 
 @pytest.fixture(params=[
     FontAwesomeExtension(),
@@ -17,16 +17,17 @@ def test_example(fa_markdown):
     assert fa_markdown.convert('i ♥ :fa-mug-hot:') == expected_markup
 
 
-def test_unknown_raises(fa_markdown):
+def test_unknown_icon_renders(fa_markdown):
+    # Instead of raising an exception, unknown icons should render normally
     unknown_icon = 'arglebargle'
-    with pytest.raises(FontAwesomeException, match=unknown_icon) as exc:
-        fa_markdown.convert("i ♥ :fa-{0}:".format(unknown_icon))
-        assert unknown_icon in exc.value.message
+    expected_markup = f'<p>i ♥ <i class="fa-solid fa-{unknown_icon}"></i></p>'
+    assert fa_markdown.convert(f"i ♥ :fa-{unknown_icon}:") == expected_markup
 
 
-def test_prefix_not_found_raises(fa_markdown):
-    with pytest.raises(FontAwesomeException, match="Prefix 'prefix' is not available for facebook."):
-        fa_markdown.convert("i ♥ :fa fa-facebook:")
+def test_unknown_prefix_renders(fa_markdown):
+    # Test with an unknown prefix - should default to solid style
+    expected_markup = '<p>i ♥ <i class="fa-solid fa-facebook"></i></p>'
+    assert fa_markdown.convert("i ♥ :fa fa-facebook:") == expected_markup
     
 
 def test_size(fa_markdown):
@@ -49,27 +50,27 @@ def test_size(fa_markdown):
     assert fa_markdown.convert('i ♥ :fa-mug-hot fa-10x:') == expected_markup
 
 
-def test_fab_icon(fa_markdown):
-    expected_markup = '<p>i ♥ <i class="fa-brands fa-facebook"></i></p>'
-    assert fa_markdown.convert('i ♥ :fa-facebook:') == expected_markup
-
-
-def test_fab_icon_with_prefix(fa_markdown):
+def test_brand_icon(fa_markdown):
     expected_markup = '<p>i ♥ <i class="fa-brands fa-facebook"></i></p>'
     assert fa_markdown.convert('i ♥ :fab fa-facebook:') == expected_markup
 
 
-def test_far_icon_with_prefix(fa_markdown):
+def test_regular_icon_with_prefix(fa_markdown):
     expected_markup = '<p>i ♥ <i class="fa-regular fa-star"></i></p>'
     assert fa_markdown.convert('i ♥ :far fa-star:') == expected_markup
 
 
-def test_fa_icon_without_prefix(fa_markdown):
+def test_solid_icon_without_prefix(fa_markdown):
     expected_markup = '<p>i ♥ <i class="fa-solid fa-star"></i></p>'
     assert fa_markdown.convert('i ♥ :fa-star:') == expected_markup
 
 
-# light style not found in icons.json...
-# def test_fal_icon_with_prefix(fa_markdown):
-    # expected_markup = '<p>i ♥ <i class="fal fa-font-awesome-logo-full"></i></p>'
-    # assert fa_markdown.convert('i ♥ :fal fa-font-awesome-logo-full:') == expected_markup
+def test_light_icon_with_prefix(fa_markdown):
+    expected_markup = '<p>i ♥ <i class="fa-light fa-star"></i></p>'
+    assert fa_markdown.convert('i ♥ :fal fa-star:') == expected_markup
+
+
+def test_pro_icon_should_render(fa_markdown):
+    # This test verifies that pro-only icons still render HTML correctly
+    expected_markup = '<p>i ♥ <i class="fa-solid fa-radar"></i></p>'
+    assert fa_markdown.convert('i ♥ :fa-radar:') == expected_markup

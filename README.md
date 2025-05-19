@@ -5,7 +5,7 @@ Use emoticon-like strings like `:fa-hot-mug:` to place the corresponding FontAwe
 
 ### How to use
 
-Include FontAwesome v6.6 CSS/assets to your DOM, then add `fontawesome_in_markdown` to your Markdown:
+Include FontAwesome (any valid version) CSS/assets to your DOM, then add `fontawesome_in_markdown` to your Markdown:
 
 ```python
 from markdown import Markdown
@@ -39,7 +39,7 @@ will output
 
 ### Known issues
 
-The `light` prefix, althought supported in code, won't work because FontAwesome doesn't currently expose `light` icons in their metadata file.
+Not exactly an issue, but worth mentioning that, with [issue #1](https://github.com/your-repo/fontawesome-in-markdown/issues/1), validation has been removed. Invalid icons are handed to FontAwesome and the behavior is handled by the library CSS. This means that the library no longer warns you about possible typos or errors in the icon and style naming.
 
 ### Credits
 
