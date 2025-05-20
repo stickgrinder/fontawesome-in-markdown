@@ -14,7 +14,7 @@ setup(
     url='http://stickgrinder.github.com/fontawesome-in-markdown',
     author='StickGrinder',
     author_email='stickgrinder@gmail.com',
-    license='GPL-3.0',
+    license='GPLv3',
     packages=['fontawesome_in_markdown'],
     package_dir={'fontawesome_in_markdown': 'src/fontawesome_in_markdown'},
     install_requires=['markdown'],
