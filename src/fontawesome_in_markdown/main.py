@@ -4,10 +4,11 @@ from markdown.inlinepatterns import InlineProcessor
 import xml.etree.ElementTree as etree
 import re
 
-# Updated pattern to capture both formats:
+# Updated pattern to capture all formats:
 # 1. Legacy format: :fa fa-star:, :fas fa-star:, :far fa-star:, etc.
 # 2. New format: :fa-cl-s fa-star:, :fa-dt fa-star:, etc.
-fontawesome_pattern = r':(?:fa([bsrl]?)|(fa-(?:([a-z]{1,2})(?:-([a-z]{1}))?(?:-([a-z]{1,2}))?)))\s?fa-([-\w]+)\s?(fa-(xs|sm|lg|[\d+]x|10x))?:'
+# 3. Basic format: :fa-star: (no prefix specified)
+fontawesome_pattern = r':(?:fa([bsrl]?)|(fa-(?:([a-z]{1,2})(?:-([a-z]{1}))?(?:-([a-z]{1,2}))?))?)?\s?fa-([-\w]+)\s?(fa-(xs|sm|lg|[\d+]x|10x))?:'
 
 # Family prefixes
 prefix_to_family = {

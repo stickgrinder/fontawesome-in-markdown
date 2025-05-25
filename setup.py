@@ -7,7 +7,7 @@ def readme():
 
 setup(
     name='fontawesome-in-markdown',
-    version='0.2.0',
+    version='0.2.1',
     description='Markdown extension to include FontAwesome icons with ease.',
     long_description=readme(),
     long_description_content_type='text/markdown',

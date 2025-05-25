@@ -101,6 +101,12 @@ def test_only_style_specified(fa_markdown):
     assert fa_markdown.convert('i ♥ :fa-l fa-user:') == expected_markup
 
 
+def test_no_prefix_specified(fa_markdown):
+    """Test that using no prefix defaults to classic solid"""
+    expected_markup = '<p>i ♥ <i class="fa-solid fa-star"></i></p>'
+    assert fa_markdown.convert('i ♥ :fa-star:') == expected_markup
+
+
 # Special cases
 def test_brands_ignores_style(fa_markdown):
     # Brands should ignore any style specification
